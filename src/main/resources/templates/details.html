@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head(${movie.title})}"></head>
+<body>
+
+    <!-- Header Navigation -->
+    <th:block th:replace="~{fragments :: navbar}"></th:block>
+
+    <!-- Details Presentation Hero Section -->
+    <section class="details-hero" th:style="'background-image: url(' + ${movie.backdropUrl} + ');'">
+        <div class="details-hero-overlay"></div>
+        <div class="details-hero-container">
+            <!-- Poster -->
+            <div class="details-poster-box">
+                <img th:src="${movie.posterUrl}" th:alt="${movie.title}" class="details-poster">
+            </div>
+
+            <!-- Content Details -->
+            <div class="details-content">
+                <span class="hero-badge" th:text="${movie.type == 'movie' ? 'Movie' : 'TV Series'}">Type</span>
+                <h1 class="details-title" th:text="${movie.title}">Title</h1>
+                
+                <div class="details-meta-row">
+                    <span class="rating-badge">
+                        <i class="fa-solid fa-star" style="margin-right: 2px;"></i> <span th:text="${movie.rating}">8.9</span>
+                    </span>
+                    <span th:text="${movie.releaseYear}">2024</span>
+                    <span th:text="${movie.duration}">2h 15m</span>
+                    <span class="details-genres" th:text="${#strings.listJoin(movie.genres, ', ')}">Action, Sci-Fi</span>
+                </div>
+
+                <p class="details-synopsis" th:text="${movie.description}">Synopsis description goes here.</p>
+
+                <!-- Cast List -->
+                <div class="details-crew">
+                    <span class="crew-label">Starring Cast:</span>
+                    <div class="cast-container">
+                        <div class="cast-member" th:each="actor : ${movie.cast}">
+                            <!-- Generate nice initials for avatar fallback -->
+                            <div class="cast-avatar" th:text="${#strings.substring(actor, 0, 1) + (actor.contains(' ') ? #strings.substring(actor, actor.indexOf(' ') + 1, actor.indexOf(' ') + 2) : '')}">JD</div>
+                            <span class="cast-name" th:text="${actor}">Actor Name</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="hero-btns" style="margin-top: 1.5rem;">
+                    <button class="btn btn-primary" th:onclick="'playMovieTrailer(\'' + ${movie.trailerUrl} + '\', \'' + ${movie.id} + '\')'">
+                        <i class="fa-solid fa-play"></i> Play Trailer
+                    </button>
+                    <button class="btn btn-secondary" id="details-watchlist-btn" th:data-id="${movie.id}">
+                        <i class="fa-solid fa-plus"></i> Add to List
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recommended / "More Like This" Section -->
+    <section class="section-container">
+        <h2 class="section-title">More Like This</h2>
+        <div class="carousel-wrapper">
+            <button class="carousel-arrow carousel-arrow-left" aria-label="Scroll Left" onclick="scrollRail('recommendations-rail', -1)">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <div class="carousel-rail" id="recommendations-rail">
+                <!-- Skeletons initially -->
+                <div class="skeleton skeleton-card"></div>
+                <div class="skeleton skeleton-card"></div>
+                <div class="skeleton skeleton-card"></div>
+                <div class="skeleton skeleton-card"></div>
+                <div class="skeleton skeleton-card"></div>
+            </div>
+            <button class="carousel-arrow carousel-arrow-right" aria-label="Scroll Right" onclick="scrollRail('recommendations-rail', 1)">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- YouTube Trailer Modal -->
+    <th:block th:replace="~{fragments :: trailer_modal}"></th:block>
+
+    <!-- Footer -->
+    <th:block th:replace="~{fragments :: footer}"></th:block>
+
+    <!-- Core Scripts -->
+    <th:block th:replace="~{fragments :: scripts}"></th:block>
+
+    <!-- Page Specific Script -->
+    <script src="/js/pages.js"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        const movieId = /*[[${movie.id}]]*/ '1';
+        const primaryGenre = /*[[${movie.genres[0]}]]*/ 'Sci-Fi';
+        /*]]>*/
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initDetailsPage(movieId, primaryGenre);
+        });
+
+        function scrollRail(railId, direction) {
+            const rail = document.getElementById(railId);
+            if (rail) {
+                const scrollAmount = rail.clientWidth * 0.8;
+                rail.scrollBy({
+                    left: direction * scrollAmount,
+                    behavior: 'smooth'
+                });
+            }
+        }
+    </script>
+</body>
+</html>

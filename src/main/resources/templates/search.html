@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Search')}"></head>
+<body>
+
+    <!-- Header Navigation -->
+    <th:block th:replace="~{fragments :: navbar}"></th:block>
+
+    <!-- Main Content Area -->
+    <main class="section-container" style="margin-top: 120px;">
+        
+        <!-- Search Input Box -->
+        <div class="search-input-container">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="search-input" class="search-field" placeholder="Search by title, genre, cast members, or synopsis..." autofocus>
+        </div>
+
+        <!-- Search Results Count -->
+        <div class="search-results-info" id="search-results-info" style="display: none;">
+            Found <span id="results-count" style="color: var(--accent-red); font-weight: 700;">0</span> results for "<span id="search-query-display"></span>"
+        </div>
+
+        <!-- Results Grid -->
+        <div class="movie-grid" id="search-grid">
+            <div class="no-results" id="initial-search-state">
+                <i class="fa-solid fa-film"></i>
+                <h3>Search CineStream</h3>
+                <p>Type above to search our library of movies, series, and documentaries.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- YouTube Trailer Modal -->
+    <th:block th:replace="~{fragments :: trailer_modal}"></th:block>
+
+    <!-- Footer -->
+    <th:block th:replace="~{fragments :: footer}"></th:block>
+
+    <!-- Core Scripts -->
+    <th:block th:replace="~{fragments :: scripts}"></th:block>
+
+    <!-- Page Specific Script -->
+    <script src="/js/pages.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initSearchPage();
+        });
+    </script>
+</body>
+</html>

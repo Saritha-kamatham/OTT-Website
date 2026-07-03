@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Movies')}"></head>
+<body>
+
+    <!-- Header Navigation -->
+    <th:block th:replace="~{fragments :: navbar}"></th:block>
+
+    <!-- Main Grid Content -->
+    <main class="section-container">
+        
+        <!-- Page Title & Filters -->
+        <div class="page-header">
+            <h1 class="page-title">Explore Movies</h1>
+            
+            <div class="filter-bar">
+                <!-- Genre Pills -->
+                <div class="genres-pills" id="genres-pills-container">
+                    <button class="genre-pill active" data-genre="all">All Genres</button>
+                    <!-- Remaining pills loaded dynamically -->
+                    <span class="skeleton" style="width: 80px; height: 32px; border-radius: 30px;"></span>
+                    <span class="skeleton" style="width: 90px; height: 32px; border-radius: 30px;"></span>
+                    <span class="skeleton" style="width: 70px; height: 32px; border-radius: 30px;"></span>
+                </div>
+
+                <!-- Sort Options -->
+                <div class="sort-container">
+                    <label for="sort-select" class="form-label" style="margin-bottom: 0; color: var(--text-secondary); font-size: 0.9rem; font-weight: 600;">Sort By:</label>
+                    <select id="sort-select" class="sort-select">
+                        <option value="rating-desc">Rating: High to Low</option>
+                        <option value="year-desc" selected>Newest First</option>
+                        <option value="year-asc">Oldest First</option>
+                        <option value="name-asc">Title: A-Z</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Movies Grid -->
+        <div class="movie-grid" id="movies-grid">
+            <!-- Skeleton cards shown during ajax load -->
+            <div class="skeleton skeleton-card"></div>
+            <div class="skeleton skeleton-card"></div>
+            <div class="skeleton skeleton-card"></div>
+            <div class="skeleton skeleton-card"></div>
+            <div class="skeleton skeleton-card"></div>
+            <div class="skeleton skeleton-card"></div>
+            <div class="skeleton skeleton-card"></div>
+            <div class="skeleton skeleton-card"></div>
+            <div class="skeleton skeleton-card"></div>
+            <div class="skeleton skeleton-card"></div>
+        </div>
+
+    </main>
+
+    <!-- YouTube Trailer Modal -->
+    <th:block th:replace="~{fragments :: trailer_modal}"></th:block>
+
+    <!-- Footer -->
+    <th:block th:replace="~{fragments :: footer}"></th:block>
+
+    <!-- Core Scripts -->
+    <th:block th:replace="~{fragments :: scripts}"></th:block>
+    
+    <!-- Page Specific Script -->
+    <script src="/js/pages.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if there's a genre query parameter in the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const initialGenre = urlParams.get('genre') || 'all';
+            
+            renderCatalogPage('movie', initialGenre);
+        });
+    </script>
+</body>
+</html>

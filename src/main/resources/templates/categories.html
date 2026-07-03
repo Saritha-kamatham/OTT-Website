@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Categories')}"></head>
+<body>
+
+    <!-- Header Navigation -->
+    <th:block th:replace="~{fragments :: navbar}"></th:block>
+
+    <!-- Main Grid Content -->
+    <main class="section-container">
+        
+        <div class="page-header">
+            <h1 class="page-title">Browse Categories</h1>
+            <p style="color: var(--text-secondary); max-width: 600px;">Explore our library by genres and styles. Click on a category below to filter movies and TV shows.</p>
+        </div>
+
+        <!-- Categories Grid -->
+        <div class="categories-grid">
+            <!-- 1. Action -->
+            <a href="/movies?genre=Action" class="category-card">
+                <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=600&auto=format&fit=crop&q=80" alt="Action" class="category-bg">
+                <div class="category-gradient"></div>
+                <span class="category-name">Action</span>
+            </a>
+
+            <!-- 2. Sci-Fi -->
+            <a href="/movies?genre=Sci-Fi" class="category-card">
+                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&auto=format&fit=crop&q=80" alt="Sci-Fi" class="category-bg">
+                <div class="category-gradient"></div>
+                <span class="category-name">Sci-Fi</span>
+            </a>
+
+            <!-- 3. Comedy -->
+            <a href="/movies?genre=Comedy" class="category-card">
+                <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=600&auto=format&fit=crop&q=80" alt="Comedy" class="category-bg">
+                <div class="category-gradient"></div>
+                <span class="category-name">Comedy</span>
+            </a>
+
+            <!-- 4. Drama -->
+            <a href="/movies?genre=Drama" class="category-card">
+                <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=600&auto=format&fit=crop&q=80" alt="Drama" class="category-bg">
+                <div class="category-gradient"></div>
+                <span class="category-name">Drama</span>
+            </a>
+
+            <!-- 5. Horror -->
+            <a href="/movies?genre=Horror" class="category-card">
+                <img src="https://images.unsplash.com/photo-1505635339340-3614efe4e697?w=600&auto=format&fit=crop&q=80" alt="Horror" class="category-bg">
+                <div class="category-gradient"></div>
+                <span class="category-name">Horror</span>
+            </a>
+
+            <!-- 6. Romance -->
+            <a href="/movies?genre=Romance" class="category-card">
+                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600&auto=format&fit=crop&q=80" alt="Romance" class="category-bg">
+                <div class="category-gradient"></div>
+                <span class="category-name">Romance</span>
+            </a>
+
+            <!-- 7. Thriller / Mystery -->
+            <a href="/movies?genre=Thriller" class="category-card">
+                <img src="https://images.unsplash.com/photo-1461360370896-922624d12aa1?w=600&auto=format&fit=crop&q=80" alt="Thriller" class="category-bg">
+                <div class="category-gradient"></div>
+                <span class="category-name">Thriller</span>
+            </a>
+
+            <!-- 8. Documentary -->
+            <a href="/movies?genre=Documentary" class="category-card">
+                <img src="https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=600&auto=format&fit=crop&q=80" alt="Documentary" class="category-bg">
+                <div class="category-gradient"></div>
+                <span class="category-name">Documentary</span>
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <th:block th:replace="~{fragments :: footer}"></th:block>
+
+    <!-- Core Scripts -->
+    <th:block th:replace="~{fragments :: scripts}"></th:block>
+</body>
+</html>
