@@ -151,20 +151,11 @@ This project helped in understanding:
 
 ---
 
-## 📸 Screenshots
+## Live Link
+Deployment Link : https://ott-website-production.up.railway.app/
 
-You can add screenshots of the application here after deployment.
 
-Example:
 
-* Home Page
-* Movies Page
-* TV Shows Page
-* Search Page
-* Movie Details Page
-* My List Page
-
----
 
 ## 👨‍💻 Author
 
